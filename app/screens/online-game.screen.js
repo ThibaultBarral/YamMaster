@@ -3,6 +3,7 @@
 import React, { useContext } from "react";
 import { StyleSheet, View, Button, Text } from "react-native";
 import { SocketContext } from '../contexts/socket.context';
+import OnlineGameController from "../controllers/online-game.controller";
 
 export default function OnlineGameScreen({ navigation }) {
     const socket = useContext(SocketContext);
@@ -18,19 +19,9 @@ export default function OnlineGameScreen({ navigation }) {
                     </Text> </>
             )}
             {socket && (
-                <>
-                    <Text style={styles.paragraph}>
-                        Online Game Interface
-                    </Text>
-                    <Text style={styles.footnote}>
-                        My socket id is: {socket.id}
-                    </Text>
-                    <Button
-                        title="Revenir au menu"
-                        onPress={() => navigation.navigate('HomeScreen')}
-                    />
-                </>
-            )} </View>
+                <OnlineGameController />
+            )}
+        </View>
     );
 }
 const styles = StyleSheet.create({
