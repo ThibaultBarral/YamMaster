@@ -1,12 +1,12 @@
-// app/screens/online-game.screen.js
-
 import React, { useContext } from "react";
 import { StyleSheet, View, Button, Text } from "react-native";
 import { SocketContext } from '../contexts/socket.context';
 import OnlineGameController from "../controllers/online-game.controller";
 
 export default function OnlineGameScreen({ navigation }) {
+
     const socket = useContext(SocketContext);
+
     return (
         <View style={styles.container}>
             {!socket && (
@@ -16,14 +16,19 @@ export default function OnlineGameScreen({ navigation }) {
                     </Text>
                     <Text style={styles.footnote}>
                         Restart the app and wait for the server to be back again.
-                    </Text> </>
+                    </Text>
+                </>
             )}
+
             {socket && (
-                <OnlineGameController />
+                <>
+                    <OnlineGameController />
+                </>
             )}
         </View>
     );
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

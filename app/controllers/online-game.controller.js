@@ -1,9 +1,7 @@
-// app/controller/online-game.controller.js
-
 import React, { useEffect, useState, useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {Button, StyleSheet, Text, View} from "react-native";
 import { SocketContext } from '../contexts/socket.context';
-import Board from "../components/board/board.component";
+import Board from "../components/board/board.components";
 
 
 export default function OnlineGameController() {
@@ -13,6 +11,11 @@ export default function OnlineGameController() {
     const [inQueue, setInQueue] = useState(false);
     const [inGame, setInGame] = useState(false);
     const [idOpponent, setIdOpponent] = useState(null);
+
+    const handlePress = () => {
+        socket.emit("queue.leave");
+        navigation.navigate('HomeScreen');
+    }
 
     useEffect(() => {
         console.log('[emit][queue.join]:', socket.id);
@@ -50,6 +53,10 @@ export default function OnlineGameController() {
                     <Text style={styles.paragraph}>
                         Waiting for another player...
                     </Text>
+                    <Button
+                        title="Quitter la file"
+                        onPress={() => handlePress()}
+                    />
                 </>
             )}
 

@@ -3,7 +3,9 @@ import { StyleSheet, View, Button, Text } from "react-native";
 import { SocketContext } from '../contexts/socket.context';
 
 export default function VsBotGameScreen({ navigation }) {
+
     const socket = useContext(SocketContext);
+
     return (
         <View style={styles.container}>
             {!socket && (
@@ -13,8 +15,10 @@ export default function VsBotGameScreen({ navigation }) {
                     </Text>
                     <Text style={styles.footnote}>
                         Restart the app and wait for the server to be back again.
-                    </Text> </>
+                    </Text>
+                </>
             )}
+
             {socket && (
                 <>
                     <Text style={styles.paragraph}>
@@ -28,9 +32,11 @@ export default function VsBotGameScreen({ navigation }) {
                         onPress={() => navigation.navigate('HomeScreen')}
                     />
                 </>
-            )} </View>
+            )}
+        </View>
     );
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
