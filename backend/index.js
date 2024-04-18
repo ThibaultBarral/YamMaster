@@ -42,41 +42,44 @@ const playerOutGame = (socket) => {
 
 const createGame = (player1Socket, player2Socket) => {
 
-    const newGame = GameService.init.gameState();
-    newGame['idGame'] = uniqid();
-    newGame['player1Socket'] = player1Socket;
-    newGame['player2Socket'] = player2Socket;
+  const newGame = GameService.init.gameState();
+  newGame['idGame'] = uniqid();
+  newGame['player1Socket'] = player1Socket;
+  newGame['player2Socket'] = player2Socket;
 
-    games.push(newGame);
+  games.push(newGame);
 
-    const gameIndex = GameService.utils.findGameIndexById(games, newGame.idGame);
+  const gameIndex = GameService.utils.findGameIndexById(games, newGame.idGame);
 
-    games[gameIndex].player1Socket.emit('game.start', GameService.send.forPlayer.viewGameState('player:1', games[gameIndex]));
-    games[gameIndex].player2Socket.emit('game.start', GameService.send.forPlayer.viewGameState('player:2', games[gameIndex]));
+  games[gameIndex].player1Socket.emit('game.start', GameService.send.forPlayer.viewGameState('player:1', games[gameIndex]));
+  games[gameIndex].player2Socket.emit('game.start', GameService.send.forPlayer.viewGameState('player:2', games[gameIndex]));
 
-    games[gameIndex].player1Socket.emit('game.deck', GameService.send.forPlayer.deckViewState('player:1', games[gameIndex].gameState));
-    games[gameIndex].player2Socket.emit('game.deck', GameService.send.forPlayer.deckViewState('player:2', games[gameIndex].gameState));
+  games[gameIndex].player1Socket.emit('game.deck', GameService.send.forPlayer.deckViewState('player:1', games[gameIndex].gameState));
+  games[gameIndex].player2Socket.emit('game.deck', GameService.send.forPlayer.deckViewState('player:2', games[gameIndex].gameState));
 
-    const gameInterval = setInterval(() => {
+  const gameInterval = setInterval(() => {
 
-        games[gameIndex].gameState.timer--;
-        if (games[gameIndex].gameState.timer === 0) {
-            games[gameIndex].gameState.currentTurn = games[gameIndex].gameState.currentTurn === 'player:1' ? 'player:2' : 'player:1';
-            games[gameIndex].gameState.timer = GameService.timer.getTurnDuration();
-            games[gameIndex].gameState.deck = GameService.init.deck();
-            games[gameIndex].player1Socket.emit('game.deck', GameService.send.forPlayer.deckViewState('player:1', games[gameIndex].gameState));
-            games[gameIndex].player2Socket.emit('game.deck', GameService.send.forPlayer.deckViewState('player:2', games[gameIndex].gameState));
-        }
-    }, 1000);
+    games[gameIndex].gameState.timer--;
+
+    if (games[gameIndex].gameState.timer === 0) {
+
+      games[gameIndex].gameState.currentTurn = games[gameIndex].gameState.currentTurn === 'player:1' ? 'player:2' : 'player:1';
+      games[gameIndex].gameState.timer = GameService.timer.getTurnDuration();
+      games[gameIndex].gameState.deck = GameService.init.deck();
+      games[gameIndex].player1Socket.emit('game.deck', GameService.send.forPlayer.deckViewState('player:1', games[gameIndex].gameState));
+      games[gameIndex].player2Socket.emit('game.deck', GameService.send.forPlayer.deckViewState('player:2', games[gameIndex].gameState));
+    }
+
+  }, 1000);
 
 
-    player1Socket.on('disconnect', () => {
-        clearInterval(gameInterval);
-    });
+  player1Socket.on('disconnect', () => {
+    clearInterval(gameInterval);
+  });
 
-    player2Socket.on('disconnect', () => {
-        clearInterval(gameInterval);
-    });
+  player2Socket.on('disconnect', () => {
+    clearInterval(gameInterval);
+  });
 };
 
 // ---------------------------------------
@@ -108,6 +111,6 @@ io.on('connection', socket => {
 
 app.get('/', (req, res) => res.sendFile('index.html'));
 
-http.listen(3000, function(){
+http.listen(3000, function () {
   console.log('listening on *:3000');
 });
