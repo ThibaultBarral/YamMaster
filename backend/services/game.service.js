@@ -1,4 +1,4 @@
-const TURN_DURATION = 40;
+const TURN_DURATION = 30;
 
 const DECK_INIT = {
     dices: [

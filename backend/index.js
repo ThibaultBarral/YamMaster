@@ -33,11 +33,28 @@ const playerOutQueue = (socket) => {
   queue = queue.filter((sock) => sock.id !== socket.id);
 };
 
-const playerOutGame = (socket) => {
+const sendGameState = (game) => {
+  game.player1Socket.emit(
+      "game.deck.view-state",
+      GameService.send.forPlayer.deckViewState("player:1", game.gameState)
+  );
+  game.player2Socket.emit(
+      "game.deck.view-state",
+      GameService.send.forPlayer.deckViewState("player:2", game.gameState)
+  );
+};
 
-  games = games.filter((game) => game.player1Socket.id !== socket.id && game.player2Socket.id !== socket.id);
-
-  socket.emit('queue.added', GameService.send.forPlayer.viewQueueState());
+const updateClientsViewTimers = (game) => {
+  setTimeout(() => {
+    game.player1Socket.emit(
+        "game.timer",
+        GameService.send.forPlayer.gameTimer("player:1", game.gameState)
+    );
+    game.player2Socket.emit(
+        "game.timer",
+        GameService.send.forPlayer.gameTimer("player:2", game.gameState)
+    );
+  }, 200)
 };
 
 const createGame = (player1Socket, player2Socket) => {
@@ -54,8 +71,8 @@ const createGame = (player1Socket, player2Socket) => {
   games[gameIndex].player1Socket.emit('game.start', GameService.send.forPlayer.viewGameState('player:1', games[gameIndex]));
   games[gameIndex].player2Socket.emit('game.start', GameService.send.forPlayer.viewGameState('player:2', games[gameIndex]));
 
-  games[gameIndex].player1Socket.emit('game.deck', GameService.send.forPlayer.deckViewState('player:1', games[gameIndex].gameState));
-  games[gameIndex].player2Socket.emit('game.deck', GameService.send.forPlayer.deckViewState('player:2', games[gameIndex].gameState));
+  console.log("game:", games[gameIndex]);
+  sendGameState(games[gameIndex])
 
   const gameInterval = setInterval(() => {
 
@@ -66,9 +83,10 @@ const createGame = (player1Socket, player2Socket) => {
       games[gameIndex].gameState.currentTurn = games[gameIndex].gameState.currentTurn === 'player:1' ? 'player:2' : 'player:1';
       games[gameIndex].gameState.timer = GameService.timer.getTurnDuration();
       games[gameIndex].gameState.deck = GameService.init.deck();
-      games[gameIndex].player1Socket.emit('game.deck', GameService.send.forPlayer.deckViewState('player:1', games[gameIndex].gameState));
-      games[gameIndex].player2Socket.emit('game.deck', GameService.send.forPlayer.deckViewState('player:2', games[gameIndex].gameState));
+
+      sendGameState(games[gameIndex])
     }
+    updateClientsViewTimers(games[gameIndex])
 
   }, 1000);
 
