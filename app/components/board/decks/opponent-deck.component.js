@@ -10,7 +10,6 @@ const OpponentDeckComponent = () => {
 
     useEffect(() => {
         socket.on("game.deck.view-state", (data) => {
-            console.log('PLAYER DECK:', data);
             setDisplayOpponentDeck(data['displayOpponentDeck']);
             if (data['displayOpponentDeck']) {
                 setOpponentDices(data['dices']);

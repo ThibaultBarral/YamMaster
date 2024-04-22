@@ -1,3 +1,7 @@
+import {useContext, useEffect, useState} from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {SocketContext} from "../../../contexts/socket.context";
+
 const Choices = () => {
 
     const socket = useContext(SocketContext);
@@ -10,6 +14,7 @@ const Choices = () => {
     useEffect(() => {
 
         socket.on("game.choices.view-state", (data) => {
+            console.log('AVAILABLE CHOICES:', data);
             setDisplayChoices(data['displayChoices']);
             setCanMakeChoice(data['canMakeChoice']);
             setIdSelectedChoice(data['idSelectedChoice']);
