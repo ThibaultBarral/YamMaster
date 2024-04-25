@@ -130,11 +130,11 @@ const updateClientViewTokens = (game) => {
 
     game.player1Socket.emit(
         "game.token",
-        {playerTokens: player1Tokens, opponentTokens: player2Tokens}
+        { playerTokens: player1Tokens, opponentTokens: player2Tokens }
     );
     game.player2Socket.emit(
         "game.token",
-        {playerTokens: player2Tokens, opponentTokens: player1Tokens}
+        { playerTokens: player2Tokens, opponentTokens: player1Tokens }
     );
 };
 

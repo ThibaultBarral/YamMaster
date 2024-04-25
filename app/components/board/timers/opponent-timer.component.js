@@ -20,17 +20,11 @@ const OpponentTimer = () => {
 };
 
 const styles = StyleSheet.create({
-    opponentTimerScoreContainer: {
-        flex: 3,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: "lightgrey"
-    },
     opponentTimerContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: "lightgrey"
     }
 });
 

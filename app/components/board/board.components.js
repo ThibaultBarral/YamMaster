@@ -6,6 +6,8 @@ import OpponentDeckComponent from "./decks/opponent-deck.component";
 import PlayerDeckComponent from "./decks/player-deck.component";
 import Choices from "./choices/choices.component";
 import Grid from "./grid/grid.component";
+import PlayerToken from "./token/player-token.component";
+import OpponentToken from "./token/opponent-token.component";
 
 const OpponentInfos = () => {
     return (
@@ -35,22 +37,23 @@ const PlayerScore = () => {
 
     return (
         <View style={styles.playerScoreContainer}>
-            <Text>PlayerScore</Text>
+            <Text>Score :</Text>
         </View>
     );
 };
 
-const Board = ({ gameViewState }) => {
+const Board = () => {
     return (
         <View style={styles.container}>
-            <View style={[styles.row, { height: '5%' }]}>
+            <View style={[styles.row, { height: '10%' }]}>
                 <OpponentInfos />
                 <View style={styles.opponentTimerScoreContainer}>
                     <OpponentTimer />
                     <OpponentScore />
+                    <OpponentToken />
                 </View>
             </View>
-            <View style={[styles.row, { height: '25%' }]}>
+            <View style={[styles.row, { height: '15%' }]}>
                 <OpponentDeckComponent />
             </View>
             <View style={[styles.row, { height: '40%' }]}>
@@ -60,11 +63,12 @@ const Board = ({ gameViewState }) => {
             <View style={[styles.row, { height: '25%' }]}>
                 <PlayerDeckComponent />
             </View>
-            <View style={[styles.row, { height: '5%' }]}>
+            <View style={[styles.row, { height: '10%' }]}>
                 <PlayerInfos />
                 <View style={styles.playerTimerScoreContainer}>
                     <PlayerTimer />
                     <PlayerScore />
+                    <PlayerToken />
                 </View>
             </View>
         </View>
@@ -101,6 +105,14 @@ const styles = StyleSheet.create({
         borderRightWidth: 1,
         borderColor: 'black',
     },
+    playerTimerScoreContainer: {
+        flex: 1,
+        width: "30%"
+    },
+    opponentTimerScoreContainer: {
+        flex: 1,
+        width: "30%"
+    },
     choicesContainer: {
         flex: 3,
         justifyContent: 'center',
@@ -120,6 +132,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: "lightgrey"
     },
+    opponentScoreContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: "lightgrey"
+    }
 });
 
 export default Board;

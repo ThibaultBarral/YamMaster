@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82a13532-149f-472d-8702-c5fc251bf64b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/components/board/grid/grid.component.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/board/board.components.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/board.components.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/board/choices/choices.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/choices/choices.component.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/board/decks/opponent-deck.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/decks/opponent-deck.component.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/board/decks/player-deck.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/decks/player-deck.component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/board/timers/opponent-timer.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/timers/opponent-timer.component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/board/timers/player-timer.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/timers/player-timer.component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/board/token/opponent-token.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/token/opponent-token.component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/board/token/player-token.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/token/player-token.component.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/services/game.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/game.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +75,7 @@
       <workItem from="1713277551730" duration="416000" />
       <workItem from="1713278058902" duration="12000" />
       <workItem from="1713440409528" duration="17162000" />
-      <workItem from="1713785197571" duration="6226000" />
+      <workItem from="1713785197571" duration="31823000" />
     </task>
     <servers />
   </component>
