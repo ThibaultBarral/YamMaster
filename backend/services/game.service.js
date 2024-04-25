@@ -1,4 +1,5 @@
 const TURN_DURATION = 30;
+const MAX_TOKEN = 12;
 
 const DECK_INIT = {
     dices: [
@@ -18,6 +19,8 @@ const GAME_INIT = {
         timer: TURN_DURATION,
         player1Score: 0,
         player2Score: 0,
+        player1Tokens: MAX_TOKEN,
+        player2Tokens: MAX_TOKEN,
         grid: [],
         choices: {},
         deck: {},
@@ -112,7 +115,6 @@ const GameService = {
     },
     send: {
         forPlayer: {
-            // Return conditionnaly gameState custom objet for player views
             viewGameState: (playerKey, game) => {
                 return {
                     inQueue: false,
@@ -135,7 +137,6 @@ const GameService = {
                 };
             },
             gameTimer: (playerKey, gameState) => {
-                // Selon la clé du joueur on adapte la réponse (player / opponent)
                 const playerTimer = gameState.currentTurn === playerKey ? gameState.timer : 0;
                 const opponentTimer = gameState.currentTurn === playerKey ? 0 : gameState.timer;
                 return { playerTimer: playerTimer, opponentTimer: opponentTimer };
@@ -235,6 +236,7 @@ const GameService = {
             return -1;
         },
         changeTurn: (game) => {
+            console.log("<===> CHANGING TURN <===> FROM ", game.gameState.currentTurn)
             game.gameState.currentTurn = game.gameState.currentTurn === 'player:1' ? 'player:2' : 'player:1';
             game.gameState.timer = GameService.timer.getTurnDuration();
         }

@@ -37,6 +37,9 @@ const rollTheDice = (socket) => {
   const game = games[GameService.utils.findGameIndexBySocketId(games, socket.id)]
   const dices = game.gameState.deck.dices
 
+  game.gameState.grid = GameService.grid.resetcanBeCheckedCells(game.gameState.grid)
+  sendGridGameState(game)
+
   const rollsCounter = game.gameState.deck.rollsCounter
   const rollsMaximum = game.gameState.deck.rollsMaximum
 
@@ -47,7 +50,12 @@ const rollTheDice = (socket) => {
     game.gameState.deck.dices = GameService.dices.lockEveryDice(
         game.gameState.deck.dices
     )
-    game.gameState.timer = 5
+
+    setTimeout(() => {
+      if(Object.keys(game.gameState.choices.availableChoices).length === 0) {
+        game.gameState.timer = 5
+      }
+    }, 1000)
   }
 
   sendDeckGameState(game)
@@ -60,6 +68,14 @@ const lockADice = (socket, idDice) => {
   game.gameState.deck.dices[diceIndex].locked = !game.gameState.deck.dices[diceIndex].locked;
 
   sendDeckGameState(game)
+}
+
+const calculateTokensLeft = (game) => {
+  if(game.gameState.currentTurn === 'player:1') {
+    game.gameState.player1Tokens = game.gameState.player1Tokens - 1
+  } else {
+    game.gameState.player2Tokens = game.gameState.player2Tokens - 1
+  }
 }
 
 const sendDeckGameState = (game) => {
@@ -108,17 +124,42 @@ const updateClientsViewTimers = (game) => {
   }, 200)
 };
 
+const updateClientViewTokens = (game) => {
+  const player1Tokens = game.gameState.player1Tokens
+  const player2Tokens = game.gameState.player2Tokens
+
+    game.player1Socket.emit(
+        "game.token",
+        {playerTokens: player1Tokens, opponentTokens: player2Tokens}
+    );
+    game.player2Socket.emit(
+        "game.token",
+        {playerTokens: player2Tokens, opponentTokens: player1Tokens}
+    );
+};
+
 const displayAvailableChoices = (socket) => {
   const gameIndex = GameService.utils.findGameIndexBySocketId(games, socket.id)
+  const grid = games[gameIndex].gameState.grid
 
   const dices = games[gameIndex].gameState.deck.dices
-  console.log(dices)
   const isDefi = false
   const isSec = games[gameIndex].gameState.deck.rollsCounter === 2
   const combinations = GameService.choices.findCombinations(dices, isDefi, isSec)
-  console.log(combinations)
+  const updatedCombinations = []
 
-  games[gameIndex].gameState.choices.availableChoices = combinations
+  grid.map(row => row.map(cell => {
+    if ((combinations.find(element => element.id === cell.id) !== undefined) && (cell.owner === null)) {
+      console.log("wtf ?")
+      updatedCombinations.push(combinations.find(element => element.id === cell.id))
+    }
+  }));
+
+  games[gameIndex].gameState.choices.availableChoices = updatedCombinations.filter((element, index, self) =>
+          index === self.findIndex(t => (
+              t.value === element.value && t.id === element.id
+          ))
+  )
   sendChoicesGameState(games[gameIndex])
 }
 
@@ -149,9 +190,11 @@ const createGame = (player1Socket, player2Socket) => {
 
       games[gameIndex].gameState.deck = GameService.init.deck();
       games[gameIndex].gameState.choices = GameService.init.choices()
+
       games[gameIndex].gameState.grid = GameService.grid.resetcanBeCheckedCells(games[gameIndex].gameState.grid)
 
       sendGridGameState(games[gameIndex])
+      sendChoicesGameState(games[gameIndex])
       sendDeckGameState(games[gameIndex])
     }
     updateClientsViewTimers(games[gameIndex])
@@ -181,13 +224,11 @@ io.on('connection', socket => {
   });
 
   socket.on("game.dices.roll", () => {
-    console.log(`rolling dices for [${socket.id}]`)
     rollTheDice(socket)
     displayAvailableChoices(socket)
   });
 
   socket.on("game.dices.lock", (idDice) => {
-    console.log(`lock [${idDice}] dice for [${socket.id}]`)
     lockADice(socket, idDice)
   });
 
@@ -207,6 +248,14 @@ io.on('connection', socket => {
 
     games[gameIndex].gameState.grid = GameService.grid.resetcanBeCheckedCells(games[gameIndex].gameState.grid);
     games[gameIndex].gameState.grid = GameService.grid.selectCell(data.cellId, data.rowIndex, data.cellIndex, games[gameIndex].gameState.currentTurn, games[gameIndex].gameState.grid);
+
+    calculateTokensLeft(games[gameIndex])
+
+    updateClientViewTokens(games[gameIndex])
+
+    if (games[gameIndex].gameState.player1Tokens === 0 || games[gameIndex].gameState.player2Tokens === 0) {
+      return 0
+    }
 
     // TODO: Ici calculer le score
     // TODO: Puis check si la partie s'arrête (lines / diagolales / no-more-gametokens)
