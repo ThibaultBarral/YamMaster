@@ -24,17 +24,20 @@ const styles = StyleSheet.create({
     dice: {
         width: 40,
         height: 40,
-        backgroundColor: "lightblue",
+        backgroundColor: "#145AA2",
         borderRadius: 5,
         justifyContent: "center",
         alignItems: "center",
+        color: 'white',
     },
     lockedDice: {
-        backgroundColor: "gray",
+        backgroundColor: "#447BB5",
     },
     diceText: {
-        fontSize: 20,
+        
+        fontSize: 18,
         fontWeight: "bold",
+        color: 'white',
     },
     opponentText: {
         fontSize: 12,

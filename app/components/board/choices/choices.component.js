@@ -55,23 +55,34 @@ const Choices = () => {
 
 const styles = StyleSheet.create({
     choicesContainer: {
-        flex: 1,
+        width: '25%',
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "space-between",
-        paddingHorizontal: 10,
-        borderBottomWidth: 1,
-        borderColor: "black",
-        backgroundColor: "lightgrey"
+        alignItems: "center", 
+        padding: 5,
+        gap: 5,
+        backgroundColor: "#145AA2",
+        // borderRadius: 5,
+        borderTopLeftRadius: 5,
+        borderBottomLeftRadius: 5,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
     },
     choiceButton: {
         backgroundColor: "white",
         borderRadius: 5,
-        marginVertical: 5,
         alignItems: "center",
         justifyContent: "center",
+        padding: 10, 
         width: "100%",
-        height: "10%"
+        height: '15%',
     },
     selectedChoice: {
         backgroundColor: "lightgreen",
