@@ -43,7 +43,17 @@ const rollTheDice = (socket) => {
   const rollsCounter = game.gameState.deck.rollsCounter
   const rollsMaximum = game.gameState.deck.rollsMaximum
 
+/*
   game.gameState.deck.dices = GameService.dices.roll(dices)
+*/
+  game.gameState.deck.dices = [
+      { id: 1, value: '2', locked: false },
+      { id: 2, value: '2', locked: false },
+      { id: 3, value: '2', locked: false },
+      { id: 4, value: '2', locked: false },
+      { id: 5, value: '2', locked: false }
+];
+
   game.gameState.deck.rollsCounter += 1
 
   if(rollsCounter === rollsMaximum) {
@@ -150,7 +160,6 @@ const displayAvailableChoices = (socket) => {
 
   grid.map(row => row.map(cell => {
     if ((combinations.find(element => element.id === cell.id) !== undefined) && (cell.owner === null)) {
-      console.log("wtf ?")
       updatedCombinations.push(combinations.find(element => element.id === cell.id))
     }
   }));
@@ -193,9 +202,9 @@ const createGame = (player1Socket, player2Socket) => {
 
       games[gameIndex].gameState.grid = GameService.grid.resetcanBeCheckedCells(games[gameIndex].gameState.grid)
 
-      sendGridGameState(games[gameIndex])
-      sendChoicesGameState(games[gameIndex])
       sendDeckGameState(games[gameIndex])
+      sendChoicesGameState(games[gameIndex])
+      sendGridGameState(games[gameIndex])
     }
     updateClientsViewTimers(games[gameIndex])
 
@@ -256,6 +265,12 @@ io.on('connection', socket => {
     if (games[gameIndex].gameState.player1Tokens === 0 || games[gameIndex].gameState.player2Tokens === 0) {
       return 0
     }
+
+    const tokensPosition = GameService.utils.findOpponentTokenPosition(games[gameIndex].gameState.grid, games[gameIndex].gameState.currentTurn)
+
+    console.log("Line score: ", GameService.score.checkLines(tokensPosition))
+    console.log("Column score: ", GameService.score.checkColumns(tokensPosition))
+    // GameService.score.checkDiagonals(tokensPosition)
 
     // TODO: Ici calculer le score
     // TODO: Puis check si la partie s'arrête (lines / diagolales / no-more-gametokens)

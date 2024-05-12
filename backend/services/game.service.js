@@ -1,5 +1,7 @@
 const TURN_DURATION = 30;
 const MAX_TOKEN = 12;
+const MAX_LENGTH_ROW = 5
+const MAX_LENGTH_COLUMN = 5
 
 const DECK_INIT = {
     dices: [
@@ -53,38 +55,38 @@ const ALL_COMBINATIONS = [
 const GRID_INIT = [
     [
         { viewContent: '1', id: 'brelan1', owner: null, canBeChecked: false },
-        { viewContent: '3', id: 'brelan3', owner: null, canBeChecked: false },
-        { viewContent: 'Défi', id: 'defi', owner: null, canBeChecked: false },
-        { viewContent: '4', id: 'brelan4', owner: null, canBeChecked: false },
-        { viewContent: '6', id: 'brelan6', owner: null, canBeChecked: false },
+        { viewContent: '3', id: 'brelan3', owner: 'player:1', canBeChecked: false },
+        { viewContent: 'Défi', id: 'defi', owner: 'player:1', canBeChecked: false },
+        { viewContent: '4', id: 'brelan4', owner: 'player:1', canBeChecked: false },
+        { viewContent: '6', id: 'brelan6', owner: 'player:1', canBeChecked: false },
     ],
     [
         { viewContent: '2', id: 'brelan2', owner: null, canBeChecked: false },
-        { viewContent: 'Carré', id: 'carre', owner: null, canBeChecked: false },
+        { viewContent: 'Carré', id: 'carre', owner: 'player:1', canBeChecked: false },
         { viewContent: 'Sec', id: 'sec', owner: null, canBeChecked: false },
-        { viewContent: 'Full', id: 'full', owner: null, canBeChecked: false },
-        { viewContent: '5', id: 'brelan5', owner: null, canBeChecked: false },
+        { viewContent: 'Full', id: 'full', owner: 'player:1', canBeChecked: false },
+        { viewContent: '5', id: 'brelan5', owner: 'player:1', canBeChecked: false },
     ],
     [
-        { viewContent: '≤8', id: 'moinshuit', owner: null, canBeChecked: false },
-        { viewContent: 'Full', id: 'full', owner: null, canBeChecked: false },
-        { viewContent: 'Yam', id: 'yam', owner: null, canBeChecked: false },
+        { viewContent: '≤8', id: 'moinshuit', owner: 'player:1', canBeChecked: false },
+        { viewContent: 'Full', id: 'full', owner: 'player:1', canBeChecked: false },
+        { viewContent: 'Yam', id: 'yam', owner: 'player:1', canBeChecked: false },
         { viewContent: 'Défi', id: 'defi', owner: null, canBeChecked: false },
         { viewContent: 'Suite', id: 'suite', owner: null, canBeChecked: false },
     ],
     [
         { viewContent: '6', id: 'brelan6', owner: null, canBeChecked: false },
-        { viewContent: 'Sec', id: 'sec', owner: null, canBeChecked: false },
-        { viewContent: 'Suite', id: 'suite', owner: null, canBeChecked: false },
-        { viewContent: '≤8', id: 'moinshuit', owner: null, canBeChecked: false },
-        { viewContent: '1', id: 'brelan1', owner: null, canBeChecked: false },
+        { viewContent: 'Sec', id: 'sec', owner: 'player:2', canBeChecked: false },
+        { viewContent: 'Suite', id: 'suite', owner: 'player:2', canBeChecked: false },
+        { viewContent: '≤8', id: 'moinshuit', owner: 'player:2', canBeChecked: false },
+        { viewContent: '1', id: 'brelan1', owner: 'player:1', canBeChecked: false },
     ],
     [
-        { viewContent: '3', id: 'brelan3', owner: null, canBeChecked: false },
-        { viewContent: '2', id: 'brelan2', owner: null, canBeChecked: false },
-        { viewContent: 'Carré', id: 'carre', owner: null, canBeChecked: false },
-        { viewContent: '5', id: 'brelan5', owner: null, canBeChecked: false },
-        { viewContent: '4', id: 'brelan4', owner: null, canBeChecked: false },
+        { viewContent: '3', id: 'brelan3', owner: 'player:1', canBeChecked: false },
+        { viewContent: '2', id: 'brelan2', owner: 'player:1', canBeChecked: false },
+        { viewContent: 'Carré', id: 'carre', owner: 'player:2', canBeChecked: false },
+        { viewContent: '5', id: 'brelan5', owner: 'player:1', canBeChecked: false },
+        { viewContent: '4', id: 'brelan4', owner: 'player:1', canBeChecked: false },
     ]
 ];
 
@@ -235,6 +237,19 @@ const GameService = {
             }
             return -1;
         },
+        findOpponentTokenPosition: (grid, player) => {
+            const tokenPositions = []
+            grid.map(
+                (e, rowIndex) => e.find(
+                    (element, colIndex) => {
+                        if(element.owner !== player) {
+                            tokenPositions.push({...element, rowIndex: rowIndex, colIndex: colIndex})
+                        }
+                    }
+                )
+            )
+            return tokenPositions
+        },
         changeTurn: (game) => {
             console.log("<===> CHANGING TURN <===> FROM ", game.gameState.currentTurn)
             game.gameState.currentTurn = game.gameState.currentTurn === 'player:1' ? 'player:2' : 'player:1';
@@ -314,7 +329,6 @@ const GameService = {
             return availableCombinations;
         }
     },
-
     grid: {
         resetcanBeCheckedCells: (grid) => {
             const updatedGrid = grid.map(row => row.map(cell => {
@@ -347,6 +361,74 @@ const GameService = {
             }));
 
             return updatedGrid;
+        }
+    },
+    score: {
+        checkLines: (opponentTokens) => {
+            let score = 0
+            let sortedTokens = []
+
+            for (let i = 0; i <= 4; i++) {
+                let nbSpaceBetween = 0
+                let followingTokens = 0
+                let previousValue = -1
+                let opponentTokensPerRow = opponentTokens.filter(e => e.rowIndex === i)
+
+                if(opponentTokensPerRow.length <= 3) {
+
+                    sortedTokens = opponentTokensPerRow.map(element => element.colIndex).sort((a, b) => a - b)
+                    sortedTokens.push(MAX_LENGTH_ROW)
+
+                    for (let j = 0; j < sortedTokens.length; j++) {
+                        nbSpaceBetween = sortedTokens[j] - previousValue
+                        previousValue = sortedTokens[j]
+
+                        followingTokens = nbSpaceBetween - 1
+                        if (followingTokens === 3) {
+                            score++
+                        } else if (followingTokens === 4) {
+                            score += 2
+                        } else if (followingTokens === 5) {
+                            score += 1000
+                        }
+                    }
+                }
+            }
+
+            return score
+        },
+        checkColumns: (opponentTokens) => {
+            let score = 0
+            let sortedTokens = []
+
+            for (let i = 0; i <= 4; i++) {
+                let nbSpaceBetween = 0
+                let followingTokens = 0
+                let previousValue = -1
+                let opponentTokensPerColumn = opponentTokens.filter(e => e.colIndex === i)
+
+                if(opponentTokensPerColumn.length <= 3) {
+
+                    sortedTokens = opponentTokensPerColumn.map(element => element.rowIndex).sort((a, b) => a - b)
+                    sortedTokens.push(MAX_LENGTH_COLUMN)
+
+                    for (let j = 0; j < sortedTokens.length; j++) {
+                        nbSpaceBetween = sortedTokens[j] - previousValue
+                        previousValue = sortedTokens[j]
+
+                        followingTokens = nbSpaceBetween - 1
+                        if (followingTokens === 3) {
+                            score++
+                        } else if (followingTokens === 4) {
+                            score += 2
+                        } else if (followingTokens === 5) {
+                            score += 1000
+                        }
+                    }
+                }
+            }
+
+            return score
         }
     }
 }
