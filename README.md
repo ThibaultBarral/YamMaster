@@ -1,35 +1,56 @@
-# Socket IO Example
 
-<p>
-  <!-- iOS -->
-  <a href="https://itunes.apple.com/app/apple-store/id982107779">
-    <img alt="Supports Expo iOS" longdesc="Supports Expo iOS" src="https://img.shields.io/badge/iOS-4630EB.svg?style=flat-square&logo=APPLE&labelColor=999999&logoColor=fff" />
-  </a>
-  <!-- Android -->
-  <a href="https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=blankexample">
-    <img alt="Supports Expo Android" longdesc="Supports Expo Android" src="https://img.shields.io/badge/Android-4630EB.svg?style=flat-square&logo=ANDROID&labelColor=A4C639&logoColor=fff" />
-  </a>
-  <!-- Web -->
-  <a href="https://docs.expo.dev/workflow/web/">
-    <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
-  </a>
-</p>
+# YamMaster
 
-This example shows how to connect and interact with socket-io backends.
+YamMaster est une application de jeu interactif qui permet aux utilisateurs de jouer contre un adversaire en ligne ou contre un bot. Ce projet est divisé en deux parties principales : le frontend, développé avec React Native et géré par Expo, et le backend, qui gère la logique du jeu, les interactions des utilisateurs, et les communications via WebSockets.
 
-## 🚀 How to use
+## Prérequis
 
-### Running the app
+Pour exécuter ce projet, vous aurez besoin de Node.js et npm installés sur votre machine. Node.js est nécessaire pour exécuter le serveur backend et npm est utilisé pour gérer les dépendances du projet.
 
-- Run `yarn` or `npm install`
-- Open `App.js` and change the `socketEndpoint` at the top of the file to point to your endpoint.
-- Open `app` with `yarn start` or `npm run start` to try it out.
+Vous pouvez télécharger et installer Node.js et npm ici : [Node.js](https://nodejs.org/).
 
-### Running the server
+## Installation
 
-- `cd` into the `backend` directory and run `yarn` or `npm install`, then run `yarn start` or `npm run start`
-- Install [ngrok](https://ngrok.com/download) and run `ngrok http 3000` and copy the https url that looks something like this `https://f7333e87.ngrok.io`.
+Pour mettre en place le projet YamMaster, suivez ces étapes :
 
-## 📝 Notes
+### Configuration du Frontend
 
-React Native provides a socket-io compatible WebSocket implementation, some people get tripped up on the https requirement so this example helps to clarify how you can get it running.
+1. Ouvrez un terminal.
+2. Changez le répertoire courant pour la racine du projet YamMaster.
+3. Exécutez la commande suivante pour installer les dépendances nécessaires :
+   ```bash
+   npm install
+   ```
+
+### Configuration du Backend
+
+1. Depuis la racine du projet, naviguez vers le dossier `backend` :
+   ```bash
+   cd backend
+   ```
+2. Installez les dépendances du backend en exécutant :
+   ```bash
+   npm install
+   ```
+
+## Lancement du Projet
+
+### Lancer le Frontend
+
+Pour démarrer le serveur de développement du frontend, exécutez la commande suivante à la racine du projet :
+
+```bash
+npx expo start
+```
+
+Cette commande lancera Expo Developer Tools dans votre navigateur, et vous pourrez scanner le QR code avec l'application Expo Go sur votre appareil mobile pour voir l'application en action.
+
+### Lancer le Backend
+
+Pour démarrer le serveur backend, assurez-vous d'être dans le dossier `backend` puis exécutez :
+
+```bash
+npm run start
+```
+
+Cette commande lancera le serveur backend, qui commencera à écouter les connexions des clients.
