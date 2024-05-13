@@ -8,6 +8,8 @@ import Choices from "./choices/choices.component";
 import Grid from "./grid/grid.component";
 import PlayerToken from "./token/player-token.component";
 import OpponentToken from "./token/opponent-token.component";
+import OpponentScore from "./score/opponent-score.component";
+import PlayerScore from "./score/player-score.component";
 
 const OpponentInfos = () => {
     return (
@@ -17,27 +19,10 @@ const OpponentInfos = () => {
     );
 };
 
-const OpponentScore = () => {
-    return (
-        <View style={styles.opponentScoreContainer}>
-            <Text>Ton adversaire a </Text>
-        </View>
-    );
-};
-
 const PlayerInfos = () => {
     return (
         <View style={styles.containerInfos}>
             <Text style={{ color: 'white' }}>Infos sur toi</Text>
-        </View>
-    );
-};
-
-const PlayerScore = () => {
-
-    return (
-        <View style={styles.playerScoreContainer}>
-            <Text>Tu as</Text>
         </View>
     );
 };
@@ -54,9 +39,6 @@ const Board = () => {
 
             <View  style={styles.infosPartieBlockUnit}>
                 <OpponentInfos />
-                {/* {opponentTimer > 0 && (
-                    <Text>À ton tour de jouer</Text>
-                )} */}
                 <View style={styles.opponentTimerScoreContainer}>
                     <OpponentTimer onTimerChange={setOpponentTimer} />
                     <OpponentScore />
@@ -65,9 +47,6 @@ const Board = () => {
             </View>
             <View  style={styles.infosPartieBlockUnit}>
                 <PlayerInfos />
-                {/* {playerTimer > 0 && (
-                    <Text>À ton tour de jouer</Text>
-                )} */}
                 <View style={styles.playerTimerScoreContainer}>
                     <PlayerTimer onTimerChange={setPlayerTimer} />
                     <PlayerScore />
@@ -200,18 +179,6 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
         // borderRightWidth: 1,
         // borderColor: 'black',
-        // backgroundColor: "lightgrey"
-    },
-    playerScoreContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        // alignItems: 'center',
-        // backgroundColor: "lightgrey"
-    },
-    opponentScoreContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        // alignItems: 'center',
         // backgroundColor: "lightgrey"
     },
     waitingText: {

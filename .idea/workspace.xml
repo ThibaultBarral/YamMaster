@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82a13532-149f-472d-8702-c5fc251bf64b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/controllers/online-bot-game.controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/board/board.components.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/board.components.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/board/score/opponent-score.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/score/opponent-score.component.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/board/score/player-score.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/score/player-score.component.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/screens/vs-bot-game.screen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/vs-bot-game.screen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/services/game.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/game.service.js" afterDir="false" />
     </list>
@@ -32,18 +30,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Paolo-Roucho"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Paolo-Roucho&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:ThibaultBarral/YamMaster.git",
-    "accountId": "c2a9b697-6e92-4320-9b47-189e653971ca"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:ThibaultBarral/YamMaster.git&quot;,
+    &quot;accountId&quot;: &quot;c2a9b697-6e92-4320-9b47-189e653971ca&quot;
   }
-}]]></component>
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -60,7 +58,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "#1 on Tibo",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/p.rouchaud/Projects/YamMaster",
     "node.js.detected.package.eslint": "true",
