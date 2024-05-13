@@ -14,18 +14,17 @@ const OpponentScore = () => {
 
     return (
         <View style={styles.opponentScoreContainer}>
-            <Text>Score: {opponentScore}</Text>
+            <Text>Ton adversaire a {opponentScore} points</Text>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+
     opponentScoreContainer: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: "lightgrey"
-    }
+        justifyContent: 'center'
+    },
 });
 
 export default OpponentScore;

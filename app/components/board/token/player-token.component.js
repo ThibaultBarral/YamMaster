@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
     playerTokenContainer: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: "lightgrey"
+        // alignItems: 'center',
+        // backgroundColor: "lightgrey"
     }
 });
 

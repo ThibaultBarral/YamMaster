@@ -14,7 +14,7 @@ const PlayerScore = () => {
 
     return (
         <View style={styles.playerScoreContainer}>
-            <Text>Score: {playerScore}</Text>
+            <Text>Tu as {playerScore} points</Text>
         </View>
     );
 };
@@ -22,9 +22,7 @@ const PlayerScore = () => {
 const styles = StyleSheet.create({
     playerScoreContainer: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: "lightgrey"
+        justifyContent: 'center'
     }
 });
 

@@ -4,7 +4,6 @@ import { SocketContext } from "../../../contexts/socket.context";
 import Dice from "./dice.component";
 
 const PlayerDeckComponent = () => {
-
     const socket = useContext(SocketContext);
     const [displayPlayerDeck, setDisplayPlayerDeck] = useState(false);
     const [dices, setDices] = useState(Array(5).fill(false));
@@ -13,7 +12,6 @@ const PlayerDeckComponent = () => {
     const [rollsMaximum, setRollsMaximum] = useState(3);
 
     useEffect(() => {
-
         socket.on("game.deck.view-state", (data) => {
             setDisplayPlayerDeck(data['displayPlayerDeck']);
             if (data['displayPlayerDeck']) {
@@ -39,22 +37,15 @@ const PlayerDeckComponent = () => {
     };
 
     return (
-
         <View style={styles.deckPlayerContainer}>
-
-            {displayPlayerDeck && (
-
+            {displayPlayerDeck ? (
                 <>
                     {displayRollButton && (
-
-                        <>
-                            <View style={styles.rollInfoContainer}>
-                                <Text style={styles.rollInfoText}>
-                                    Lancer {rollsCounter} / {rollsMaximum}
-                                </Text>
-                            </View>
-                        </>
-
+                        <View style={styles.rollInfoContainer}>
+                            <Text style={styles.rollInfoText}>
+                                Lancer {rollsCounter} / {rollsMaximum}
+                            </Text>
+                        </View>
                     )}
 
                     <View style={styles.diceContainer}>
@@ -64,23 +55,20 @@ const PlayerDeckComponent = () => {
                                 index={index}
                                 locked={diceData.locked}
                                 value={diceData.value}
-                                onPress={toggleDiceLock}
+                                onPress={() => toggleDiceLock(index)}
                             />
                         ))}
                     </View>
 
                     {displayRollButton && (
-
-                        <>
-                            <TouchableOpacity style={styles.rollButton} onPress={rollDices}>
-                                <Text style={styles.rollButtonText}>Roll</Text>
-                            </TouchableOpacity>
-                        </>
-
+                        <TouchableOpacity style={styles.rollButton} onPress={rollDices}>
+                            <Text style={styles.rollButtonText}>🎲</Text>
+                        </TouchableOpacity>
                     )}
                 </>
+            ) : (
+                <Text style={styles.waitingText}>À ton Adversaire de jouer</Text>
             )}
-
         </View>
     );
 };
@@ -90,8 +78,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        borderBottomWidth: 1,
-        borderColor: "black"
     },
     rollInfoContainer: {
         marginBottom: 10,
@@ -109,16 +95,25 @@ const styles = StyleSheet.create({
     rollButton: {
         width: "30%",
         paddingVertical: 10,
-        borderRadius: 5,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "black"
     },
     rollButtonText: {
-        fontSize: 18,
+        fontSize: 35,
         color: "white",
         fontWeight: "bold",
     },
+    waitingText: {
+        fontSize: 22,
+        fontStyle: "italic",
+        textTransform: "uppercase",
+        color: "white",
+        backgroundColor: "#447BB5",
+        width: "100%",
+        padding: 20,
+        textAlign: "center",
+        fontWeight: "bold"
+    }
 });
 
 export default PlayerDeckComponent;

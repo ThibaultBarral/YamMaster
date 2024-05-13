@@ -58,7 +58,7 @@ const Grid = () => {
 
 const styles = StyleSheet.create({
     gridContainer: {
-        flex: 7,
+        width: '75%',
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
         width: "100%",
         justifyContent: "center",
         alignItems: "center",
+        margin: 4,
     },
     cell: {
         flexDirection: "row",
@@ -77,11 +78,24 @@ const styles = StyleSheet.create({
         height: "100%",
         justifyContent: "center",
         alignItems: "center",
-        borderWidth: 1,
-        borderColor: "black",
+        backgroundColor: '#145AA2',
+        borderRadius: 5,
+        margin: 4,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
     },
+    
     cellText: {
-        fontSize: 11,
+        
+        fontSize: 16,
+        fontWeight: "bold",
+        color: 'white',
     },
     playerOwnedCell: {
         backgroundColor: "lightgreen",
@@ -92,14 +106,14 @@ const styles = StyleSheet.create({
         opacity: 0.9,
     },
     canBeCheckedCell: {
-        backgroundColor: "lightyellow",
+        backgroundColor: "green",
     },
-    topBorder: {
-        borderTopWidth: 1,
-    },
-    leftBorder: {
-        borderLeftWidth: 1,
-    },
+    // topBorder: {
+    //     borderTopWidth: 1,
+    // },
+    // leftBorder: {
+    //     borderLeftWidth: 1,
+    // },
 });
 
 export default Grid;

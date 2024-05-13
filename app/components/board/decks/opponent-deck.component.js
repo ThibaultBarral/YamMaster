@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        borderBottomWidth: 1,
-        borderColor: "black"
+        // borderBottomWidth: 1,
+        // borderColor: "black"
     },
     diceContainer: {
         flexDirection: "row",

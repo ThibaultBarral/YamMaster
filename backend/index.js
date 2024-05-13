@@ -247,7 +247,6 @@ const createBotGame = (playerSocket) => {
 
     if(games[gameIndex].gameState.currentTurn !== 'player:1') {
 
-      console.log(botTimerCounter);
       if (botTimerCounter === 2) {
 
         botTimerCounter = 1;
@@ -273,8 +272,14 @@ const createBotGame = (playerSocket) => {
           )
 
           botTimerCounter = 10
+
           games[gameIndex].gameState.grid = GameService.grid.resetcanBeCheckedCells(games[gameIndex].gameState.grid)
+          games[gameIndex].gameState.player2Tokens = games[gameIndex].gameState.player2Tokens - 1
+
+          console.log("Tokens: ", games[gameIndex].gameState.player2Tokens)
           sendGridGameState(games[gameIndex])
+          updateClientViewTokens(games[gameIndex])
+
           games[gameIndex].gameState.timer = 3
         }
       }
@@ -284,8 +289,6 @@ const createBotGame = (playerSocket) => {
     }
 
     games[gameIndex].gameState.timer--;
-
-    console.log("TURN : ", games[gameIndex].gameState.currentTurn)
 
     if (games[gameIndex].gameState.timer === 0) {
 

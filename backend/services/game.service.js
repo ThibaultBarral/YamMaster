@@ -1,4 +1,4 @@
-const TURN_DURATION = 15;
+const TURN_DURATION = 30;
 const MAX_TOKEN = 12;
 const MAX_LENGTH_ROW = 5
 const MAX_LENGTH_COLUMN = 5
@@ -131,6 +131,7 @@ const GameService = {
                             : game.player1Socket.id
                 };
             },
+
             viewQueueState: () => {
                 return {
                     inQueue: true,
@@ -177,7 +178,7 @@ const GameService = {
     },
     dices: {
         roll: (dicesToRoll) => {
-            const rolledDices = dicesToRoll.map(dice => {
+            return dicesToRoll.map(dice => {
                 if (dice.value === "") {
                     // Si la valeur du dé est vide, alors on le lance en mettant le flag locked à false
                     const newValue = String(Math.floor(Math.random() * 6) + 1);
@@ -198,15 +199,13 @@ const GameService = {
                     return dice;
                 }
             });
-            return rolledDices;
         },
 
         lockEveryDice: (dicesToLock) => {
-            const lockedDices = dicesToLock.map(dice => ({
+            return dicesToLock.map(dice => ({
                 ...dice,
                 locked: true
             }));
-            return lockedDices;
         }
     },
     utils: {
@@ -220,7 +219,7 @@ const GameService = {
         },
         findGameIndexBySocketId: (games, socketId) => {
             for (let i = 0; i < games.length; i++) {
-                if (games[i].player1Socket.id === socketId || (!games[i].gameState.isBotGame) && games[i].player2Socket.id === socketId) {
+                if (games[i].player1Socket.id === socketId || games[i].player2Socket.id === socketId) {
                     return i; // Retourne l'index du jeu si le socket est trouvé
                 }
             }
@@ -344,15 +343,6 @@ const GameService = {
             }));
         },
 
-        selectCell: (idCell, rowIndex, cellIndex, currentTurn, grid) => {
-            return grid.map((row, rowIndexParsing) => row.map((cell, cellIndexParsing) => {
-                if ((cell.id === idCell) && (rowIndexParsing === rowIndex) && (cellIndexParsing === cellIndex)) {
-                    return {...cell, owner: currentTurn};
-                } else {
-                    return cell;
-                }
-            }));
-        },
         findCanBeCheckedCells: (grid) => {
             const tokenPositions = []
             grid.map(
@@ -366,6 +356,16 @@ const GameService = {
             )
             return tokenPositions
         },
+
+        selectCell: (idCell, rowIndex, cellIndex, currentTurn, grid) => {
+            return grid.map((row, rowIndexParsing) => row.map((cell, cellIndexParsing) => {
+                if ((cell.id === idCell) && (rowIndexParsing === rowIndex) && (cellIndexParsing === cellIndex)) {
+                    return {...cell, owner: currentTurn};
+                } else {
+                    return cell;
+                }
+            }));
+        }
     },
     score: {
         checkLines: (opponentTokens) => {
@@ -466,7 +466,7 @@ const GameService = {
             }
 
             return 0
-        }
+        },
     }
 }
 
