@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82a13532-149f-472d-8702-c5fc251bf64b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/controllers/online-bot-game.controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/board/board.components.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/board.components.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/board/timers/opponent-timer.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/timers/opponent-timer.component.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/board/timers/player-timer.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/timers/player-timer.component.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/board/token/opponent-token.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/token/opponent-token.component.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/board/token/player-token.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/token/player-token.component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/board/score/opponent-score.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/score/opponent-score.component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/board/score/player-score.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/board/score/player-score.component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/screens/vs-bot-game.screen.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/screens/vs-bot-game.screen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/game.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/game.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,34 +32,59 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Paolo-Roucho"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:ThibaultBarral/YamMaster.git",
+    "accountId": "c2a9b697-6e92-4320-9b47-189e653971ca"
+  }
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2f8gFGKnZbDBxs5w9zkDO9OUjuI" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/p.rouchaud/Projects/YamMaster&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/p.rouchaud/Projects/YamMaster",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/backend" />
     </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -75,7 +101,9 @@
       <workItem from="1713277551730" duration="416000" />
       <workItem from="1713278058902" duration="12000" />
       <workItem from="1713440409528" duration="17162000" />
-      <workItem from="1713785197571" duration="31823000" />
+      <workItem from="1713785197571" duration="57575000" />
+      <workItem from="1715524949446" duration="2980000" />
+      <workItem from="1715530126071" duration="25902000" />
     </task>
     <servers />
   </component>

@@ -8,6 +8,8 @@ import Choices from "./choices/choices.component";
 import Grid from "./grid/grid.component";
 import PlayerToken from "./token/player-token.component";
 import OpponentToken from "./token/opponent-token.component";
+import PlayerScore from "./score/player-score.component";
+import OpponentScore from "./score/opponent-score.component";
 
 const OpponentInfos = () => {
     return (
@@ -17,27 +19,10 @@ const OpponentInfos = () => {
     );
 };
 
-const OpponentScore = () => {
-    return (
-        <View style={styles.opponentScoreContainer}>
-            <Text>Score: </Text>
-        </View>
-    );
-};
-
 const PlayerInfos = () => {
     return (
         <View style={styles.playerInfosContainer}>
             <Text>Player Infos</Text>
-        </View>
-    );
-};
-
-const PlayerScore = () => {
-
-    return (
-        <View style={styles.playerScoreContainer}>
-            <Text>Score :</Text>
         </View>
     );
 };

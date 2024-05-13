@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { StyleSheet, View, Button, Text } from "react-native";
 import { SocketContext } from '../contexts/socket.context';
+import OnlineBotGameController from "../controllers/online-bot-game.controller";
 
 export default function VsBotGameScreen({ navigation }) {
 
@@ -21,16 +22,7 @@ export default function VsBotGameScreen({ navigation }) {
 
             {socket && (
                 <>
-                    <Text style={styles.paragraph}>
-                        VsBot Game Interface
-                    </Text>
-                    <Text style={styles.footnote}>
-                        My socket id is: {socket.id}
-                    </Text>
-                    <Button
-                        title="Revenir au menu"
-                        onPress={() => navigation.navigate('HomeScreen')}
-                    />
+                    <OnlineBotGameController />
                 </>
             )}
         </View>
